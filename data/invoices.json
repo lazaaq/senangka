@@ -1,0 +1,16 @@
+{
+  "INV-20260715-0001": {
+    "phone": "628777888999",
+    "customer_name": "Siti Rahayu",
+    "address": "Jl. Pahlawan No. 7, Bandung",
+    "product_name": "Nangka Grade A",
+    "quantity": 1,
+    "unit_price": 50000,
+    "subtotal": 50000,
+    "ongkir": 10000,
+    "grand_total": 60000,
+    "pdf_file": "INV-20260715-0001.pdf",
+    "created_at": "2026-07-15T15:42:11.597871",
+    "status": "confirmed"
+  }
+}

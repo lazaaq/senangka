@@ -1,5 +1,7 @@
 import os
-from flask import Flask, request, jsonify, render_template_string
+import threading
+from collections import deque
+from flask import Flask, request, jsonify, render_template_string, send_file, abort
 from dotenv import load_dotenv
 
 # Load environment variables from .env
@@ -13,10 +15,30 @@ from services.prompt import get_system_prompt
 
 app = Flask(__name__)
 
+# Thread-safe cache to keep track of processed message IDs (deduplication)
+PROCESSED_MESSAGE_IDS = deque(maxlen=1000)
+processed_ids_lock = threading.Lock()
+
+def is_duplicate_message(msg_id):
+    """
+    Check if a message ID was recently processed to prevent double-replies or double menu state transitions.
+    """
+    if not msg_id:
+        return False
+    with processed_ids_lock:
+        if msg_id in PROCESSED_MESSAGE_IDS:
+            return True
+        PROCESSED_MESSAGE_IDS.append(msg_id)
+        return False
+
+
 # File Paths
-CONFIG_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), 'data', 'config.json'))
+CONFIG_FILE   = os.path.abspath(os.path.join(os.path.dirname(__file__), 'data', 'config.json'))
 PRODUCTS_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), 'data', 'products.json'))
 SESSIONS_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), 'data', 'sessions.json'))
+INVOICES_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), 'data', 'invoices.json'))
+INVOICES_DIR  = os.path.abspath(os.path.join(os.path.dirname(__file__), 'invoices'))
+os.makedirs(INVOICES_DIR, exist_ok=True)
 
 @app.route('/')
 def home():
@@ -27,11 +49,13 @@ def home():
     config = read_json(CONFIG_FILE)
     products = read_json(PRODUCTS_FILE)
     sessions = read_json(SESSIONS_FILE)
-    
+    invoices = read_json(INVOICES_FILE)
+
     fonnte_configured = bool(os.getenv("FONNTE_TOKEN")) and os.getenv("FONNTE_TOKEN") != "PLACEHOLDER_FONNTE_TOKEN"
     openrouter_configured = bool(os.getenv("OPENROUTER_API_KEY")) and os.getenv("OPENROUTER_API_KEY") != "PLACEHOLDER_OPENROUTER_API_KEY"
     openrouter_model = os.getenv("OPENROUTER_MODEL", "google/gemini-2.5-flash")
-    
+    app_url = os.getenv("APP_URL", "")
+
     # Standard modern dark/light styling dashboard
     html_template = """
     <!DOCTYPE html>
@@ -219,10 +243,14 @@ def home():
                             <span style="font-size:1.4rem; font-weight:700;">{{ products|length }}</span>
                             <div style="font-size:0.75rem; color:var(--text-muted);">Menu Aktif</div>
                         </div>
+                        <div>
+                            <span style="font-size:1.4rem; font-weight:700;">{{ invoices|length }}</span>
+                            <div style="font-size:0.75rem; color:var(--text-muted);">Total Invoice</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <h2 style="font-size:1.4rem; margin-top:40px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">🍉 Daftar Menu Produk</h2>
             <table>
                 <thead>
@@ -244,6 +272,43 @@ def home():
                     {% endfor %}
                 </tbody>
             </table>
+
+            <h2 style="font-size:1.4rem; margin-top:40px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">🧾 Riwayat Invoice Pesanan</h2>
+            {% if invoices %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>No. Invoice</th>
+                        <th>Pelanggan</th>
+                        <th>Produk</th>
+                        <th>Total</th>
+                        <th>Tanggal</th>
+                        <th>Invoice PDF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for inv_no, inv in invoices.items() | sort(reverse=true) %}
+                    <tr>
+                        <td><code>{{ inv_no }}</code></td>
+                        <td>{{ inv.customer_name }}<br><small style="color:var(--text-muted);">{{ inv.phone }}</small></td>
+                        <td>{{ inv.product_name }} x{{ inv.quantity }}</td>
+                        <td><strong>Rp {{ "{:,}".format(inv.grand_total).replace(",", ".") }}</strong></td>
+                        <td><small>{{ inv.created_at[:10] }}</small></td>
+                        <td>
+                            {% if app_url and 'YOUR_VPS_IP' not in app_url %}
+                            <a href="{{ app_url }}/invoice/{{ inv.pdf_file }}" target="_blank"
+                               style="color:var(--primary-dark); font-weight:600;">⬇ Unduh</a>
+                            {% else %}
+                            <small style="color:var(--text-muted);">Set APP_URL di .env</small>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p style="color:var(--text-muted); margin-top:12px;">Belum ada invoice yang digenerate.</p>
+            {% endif %}
         </div>
     </body>
     </html>
@@ -253,10 +318,26 @@ def home():
         config=config,
         products=products,
         sessions=sessions,
+        invoices=invoices,
         fonnte_configured=fonnte_configured,
         openrouter_configured=openrouter_configured,
-        openrouter_model=openrouter_model
+        openrouter_model=openrouter_model,
+        app_url=app_url
     )
+
+@app.route('/invoice/<filename>')
+def serve_invoice(filename):
+    """
+    Serve a generated PDF invoice file.
+    Only serves .pdf files that exist in the invoices directory.
+    """
+    if not filename.endswith('.pdf'):
+        abort(404)
+    filepath = os.path.join(INVOICES_DIR, filename)
+    if not os.path.isfile(filepath):
+        abort(404)
+    return send_file(filepath, mimetype='application/pdf', as_attachment=True,
+                     download_name=filename)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -274,10 +355,16 @@ def webhook():
 
     sender = data.get("sender")
     incoming_msg = data.get("message")
+    msg_id = data.get("id")
     
     if not sender or not incoming_msg:
         logger.warning("Incoming webhook request was rejected: 'sender' or 'message' field missing.")
         return jsonify({"status": False, "error": "Missing 'sender' or 'message' parameters"}), 400
+        
+    # Prevent reprocessing duplicate webhook requests from gateway retries
+    if msg_id and is_duplicate_message(msg_id):
+        logger.info(f"Duplicate message detected (ID: {msg_id}) from {sender}. Request ignored.")
+        return jsonify({"status": True, "message": "Duplicate request ignored"}), 200
         
     sender = normalize_phone(sender)
     incoming_msg = incoming_msg.strip()
@@ -293,41 +380,41 @@ def webhook():
         send_whatsapp_message(sender, welcome_msg)
         return jsonify({"status": True, "message": "Conversation session cleared and welcome sent"}), 200
         
-    # 2. Process conversation history
-    # Add incoming message to session
+    # 2. Add incoming message to session history
     add_message_to_session(sender, "user", incoming_msg)
-    
-    # Attempt instant local routing for numeric menu inputs to bypass LLM latency
-    from services.menu import process_numeric_message
-    local_reply = process_numeric_message(sender, incoming_msg)
-    
-    if local_reply:
-        logger.info(f"Instant numeric menu reply triggered for {sender}")
+
+    # 3. Attempt instant local routing (handles ALL menu states + text collection)
+    from services.menu import process_message
+    from services.session import set_state
+    local_reply = process_message(sender, incoming_msg)
+
+    if local_reply is not None:
+        logger.info(f"Local menu router handled message for {sender}")
         ai_reply = local_reply
     else:
-        # Fetch updated history for the LLM call
+        # 4. AI path — only for initial greetings / free-form questions
         session_data = get_session(sender)
         history = session_data.get("history", [])
-        
-        # 3. Dynamic system prompt (updates database state into prompt on the fly)
         system_prompt = get_system_prompt()
-        
-        # 4. Request completion from OpenRouter
         ai_reply = generate_ai_reply(history, system_prompt)
-    
+
+        # After AI responds, always set state to main_menu (AI always returns main menu)
+        if ai_reply:
+            set_state(sender, "main_menu")
+
     if not ai_reply:
         logger.error(f"Could not retrieve AI response for phone number: {sender}")
         config = read_json(CONFIG_FILE)
         error_msg = config.get("error_message", "Maaf, saat ini kami sedang mengalami gangguan koneksi AI. Silakan coba sesaat lagi.")
         send_whatsapp_message(sender, error_msg)
         return jsonify({"status": False, "error": "AI completion failure"}), 500
-        
-    # 5. Append AI reply to session history
+
+    # 5. Append reply to session history
     add_message_to_session(sender, "assistant", ai_reply)
-    
+
     # 6. Push the WhatsApp message back using Fonnte API
     fonnte_response = send_whatsapp_message(sender, ai_reply)
-    
+
     return jsonify({
         "status": True,
         "message": "Webhook payload completed successfully",
