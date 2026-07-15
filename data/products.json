@@ -1,30 +1,82 @@
 [
-  {
-    "id": "P001",
-    "name": "Jus Semangka Murni (Pure Watermelon Juice)",
-    "price": 15000,
-    "description": "Jus semangka segar tanpa pemanis buatan, dibuat langsung dari semangka organik pilihan.",
-    "stock": 50
-  },
-  {
-    "id": "P002",
-    "name": "Semangka Potong Segar (Fresh Cut Watermelon)",
-    "price": 10000,
-    "description": "Semangka potong dingin, manis, dan siap santap. Porsi 300 gram.",
-    "stock": 30
-  },
-  {
-    "id": "P003",
-    "name": "Smoothie Semangka Mint (Watermelon Mint Smoothie)",
-    "price": 20000,
-    "description": "Smoothie semangka segar berpadu dengan daun mint alami dan sedikit perasan lemon.",
-    "stock": 25
-  },
-  {
-    "id": "P004",
-    "name": "Salad Buah Semangka Spesial",
-    "price": 25000,
-    "description": "Kombinasi semangka, melon, apel, dan buah segar lainnya disajikan dengan saus mayones khas Senangka dan parutan keju melimpah.",
-    "stock": 15
-  }
+    {
+        "id": "NF001",
+        "name": "Nangka Grade A",
+        "category": "fresh",
+        "purpose": "makan_langsung",
+        "price": 50000,
+        "description": "Nangka kupas Grade A dengan rasa lebih manis dan daging lebih tebal. Cocok untuk dimakan langsung.",
+        "stock": true,
+        "promo": "Gratis ongkir untuk pembelian 3 pack."
+    },
+    {
+        "id": "NF002",
+        "name": "Nangka Grade B",
+        "category": "fresh",
+        "purpose": "makan_langsung",
+        "price": 45000,
+        "description": "Nangka kupas Grade B dengan rasa manis standar dan ketebalan daging standar. Cocok untuk konsumsi sehari-hari.",
+        "stock": true,
+        "promo": null
+    },
+    {
+        "id": "NF003",
+        "name": "Nangka Madu",
+        "category": "fresh",
+        "purpose": "makan_langsung",
+        "price": 60000,
+        "description": "Nangka Madu dengan rasa sangat manis dan aroma khas. Cocok untuk dimakan langsung.",
+        "stock": true,
+        "promo": null
+    },
+    {
+        "id": "NF004",
+        "name": "Tekam Yellow Malaysia (J33)",
+        "category": "fresh",
+        "purpose": "makan_langsung",
+        "price": 65000,
+        "description": "Varietas Tekam Yellow Malaysia (J33) dengan tekstur renyah dan rasa manis premium.",
+        "stock": true,
+        "promo": null
+    },
+    {
+        "id": "NF005",
+        "name": "Nangka Kiloan Fresh",
+        "category": "fresh",
+        "purpose": "campuran_es",
+        "price": 35000,
+        "description": "Nangka kiloan fresh dengan rasa manis standar, cocok untuk campuran es buah, es campur, atau dessert.",
+        "stock": true,
+        "promo": null
+    },
+    {
+        "id": "NF006",
+        "name": "Nangka Kiloan Beku",
+        "category": "frozen",
+        "purpose": "campuran_es",
+        "price": 35000,
+        "description": "Nangka kiloan beku, praktis disimpan lebih lama dan cocok untuk campuran es.",
+        "stock": true,
+        "promo": null
+    },
+    {
+        "id": "OL001",
+        "name": "Pie Nangka Mini",
+        "category": "processed",
+        "purpose": "sendiri",
+        "price": 30000,
+        "description": "Pie Nangka Mini isi 5 pcs. Cocok dinikmati sendiri atau bersama teman.",
+        "stock": true,
+        "promo": null
+    },
+    {
+        "id": "OL002",
+        "name": "Pie Nangka Besar",
+        "category": "processed",
+        "purpose": "rame_rame",
+        "price": 85000,
+        "description": "Pie Nangka ukuran besar, cocok untuk 6–8 orang.",
+        "stock": true,
+        "promo": null
+    }
 ]
