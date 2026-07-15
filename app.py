@@ -350,17 +350,24 @@ def webhook():
     if request.method == 'GET':
         return jsonify({"status": True, "message": "Fonnte Webhook URL is active"}), 200
 
-    # Fonnte usually sends content as URL-encoded form parameters or multipart form-data.
-    # We support JSON payload as well to make it resilient.
+    # Retrieve request body safely (supporting both JSON and Form parameters)
+    data = None
     if request.is_json:
-        data = request.json
-    else:
+        data = request.get_json(silent=True)
+    if not data:
         data = request.form if request.form else request.values
+    if not data:
+        data = {}
 
     sender = data.get("sender")
     incoming_msg = data.get("message")
     msg_id = data.get("id")
+    msg_type = data.get("type", "text")
     
+    # Fallback to message type tag if message is empty (e.g. user sends image without caption)
+    if not incoming_msg and msg_type and msg_type != "text":
+        incoming_msg = f"[{msg_type.upper()}]"
+        
     if not sender or not incoming_msg:
         logger.warning("Incoming webhook request was rejected: 'sender' or 'message' field missing.")
         return jsonify({"status": False, "error": "Missing 'sender' or 'message' parameters"}), 400
@@ -379,6 +386,8 @@ def webhook():
     incoming_msg_lower = incoming_msg.lower()
     if incoming_msg_lower in ["/reset", "reset", "mulai ulang", "mulai dari awal"]:
         clear_session(sender)
+        from services.session import set_state
+        set_state(sender, "main_menu")
         config = read_json(CONFIG_FILE)
         welcome_msg = config.get("welcome_message", "Halo! Selamat datang di Senangka. Ada yang bisa kami bantu?")
         send_whatsapp_message(sender, welcome_msg)
