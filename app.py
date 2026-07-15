@@ -339,13 +339,17 @@ def serve_invoice(filename):
     return send_file(filepath, mimetype='application/pdf', as_attachment=True,
                      download_name=filename)
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
     """
     Fonnte incoming message Webhook endpoint.
     Parses sender details, retrieves/updates chat sessions, 
     queries OpenRouter for AI answers, and sends WhatsApp responses.
     """
+    # Fonnte occasionally sends GET requests to verify webhook endpoint status
+    if request.method == 'GET':
+        return jsonify({"status": True, "message": "Fonnte Webhook URL is active"}), 200
+
     # Fonnte usually sends content as URL-encoded form parameters or multipart form-data.
     # We support JSON payload as well to make it resilient.
     if request.is_json:
