@@ -225,20 +225,25 @@ Invoice PDF telah kami kirimkan. Simpan sebagai bukti pesanan ya Kak! 😊
 
 Ketik pesan apa saja untuk kembali ke Menu Utama."""
 
-            # Send PDF invoice via Fonnte if generated successfully
-            if invoice_number and pdf_path:
-                app_url = os.getenv("APP_URL", "").rstrip("/")
-                if app_url and "YOUR_VPS_IP" not in app_url:
-                    pdf_url = f"{app_url}/invoice/{invoice_number}.pdf"
-                    send_whatsapp_message(
-                        phone_number,
-                        f"📄 *Invoice #{invoice_number}*\nBerikut invoice pesanan Kakak:",
-                        media_url=pdf_url,
-                        filename=f"Invoice-Senangka-{invoice_number}.pdf"
-                    )
-                    logger.info(f"Invoice PDF sent to {phone_number}: {pdf_url}")
+            # Send PDF invoice via Fonnte — direct binary upload (most reliable)
+            if invoice_number and pdf_path and os.path.isfile(pdf_path):
+                invoice_filename = f"Invoice-Senangka-{invoice_number}.pdf"
+                invoice_caption = f"📄 *Invoice #{invoice_number}*\nBerikut invoice pesanan Kakak {name}:"
+                send_result = send_whatsapp_message(
+                    phone_number,
+                    invoice_caption,
+                    file_path=pdf_path,
+                    filename=invoice_filename
+                )
+                if send_result and send_result.get("status"):
+                    logger.info(f"Invoice PDF delivered to {phone_number}: {invoice_filename}")
                 else:
-                    logger.warning("APP_URL not configured. PDF invoice generated but not sent via WhatsApp.")
+                    logger.error(
+                        f"Invoice PDF FAILED to send to {phone_number}. "
+                        f"Fonnte response: {send_result}"
+                    )
+            elif not pdf_path or not os.path.isfile(pdf_path):
+                logger.error(f"Invoice PDF file not found on disk: {pdf_path}")
 
             return conf_msg
 
