@@ -7,7 +7,7 @@
       },
       {
         "role": "assistant",
-        "content": "\ud83d\udecd\ufe0f *Detail Produk: Nangka Madu*\n\ud83d\udcb5 Harga: *Rp 60.000*\n\ud83d\udcdd Deskripsi: Nangka Madu legit wangi. Porsi 500g.\n\nUntuk respon lebih cepat, mohon balas dengan *ANGKA* jumlah yang ingin Kakak pesan:\n1. Beli 1 pack/porsi\n2. Beli 2 pack/porsi\n3. Beli 3 pack/porsi (Diskon/Gratis Ongkir!)\n0. Kembali ke Katalog"
+        "content": "\ud83d\udecd\ufe0f *Detail Produk: Nangka Madu*\n\ud83d\udcb5 Harga: *Rp 60.000*\n\ud83d\udcdd Deskripsi: Nangka Madu dengan rasa sangat manis dan aroma khas. Cocok untuk dimakan langsung.\n\nUntuk respon lebih cepat, mohon balas dengan *ANGKA* jumlah yang ingin Kakak pesan:\n1. Beli 1 pack/porsi\n2. Beli 2 pack/porsi\n3. Beli 3 pack/porsi (Diskon/Gratis Ongkir!)\n0. Kembali ke Katalog"
       },
       {
         "role": "user",
@@ -15,7 +15,7 @@
       },
       {
         "role": "assistant",
-        "content": "\ud83d\udcdd *Ringkasan Pesanan*\n- Menu: *Nangka Madu**\n- Jumlah: *2 porsi/pack*\n- Total Harga: *Rp 120.000*\n\nUntuk melanjutkan pengisian data pengiriman, mohon balas dengan *ANGKA*:\n1. Lanjutkan Pemesanan\n0. Batal & Kembali ke Katalog"
+        "content": "\ud83d\udcdd *Ringkasan Pesanan*\n- Menu: *Nangka Madu*\n- Jumlah: *2 porsi/pack*\n- Total Harga: *Rp 120.000*\n\nUntuk melanjutkan pengisian data pengiriman, mohon balas dengan *ANGKA*:\n1. Lanjutkan Pemesanan\n0. Batal & Kembali ke Katalog"
       },
       {
         "role": "user",
@@ -27,19 +27,19 @@
       },
       {
         "role": "user",
-        "content": "Budi"
+        "content": "Ahmad"
       },
       {
         "role": "assistant",
-        "content": "Terima kasih Kak *Budi*. Sekarang, silakan ketik *Alamat Lengkap Pengiriman* Kakak (Jalan, Nomor Rumah, Kecamatan/Kota):"
+        "content": "Terima kasih Kak *Ahmad*. Sekarang, silakan ketik *Alamat Lengkap Pengiriman* Kakak (Jalan, Nomor Rumah, Kecamatan/Kota):"
       },
       {
         "role": "user",
-        "content": "Jl. Mawar No. 4"
+        "content": "Bandung"
       },
       {
         "role": "assistant",
-        "content": "\u2705 *Konfirmasi Akhir Pesanan*\n- Penerima: *Budi*\n- Alamat: *Jl. Mawar No. 4*\n- Status Pembayaran: *COD (Bayar di Tempat)*\n\nMohon balas dengan *ANGKA* saja untuk menyelesaikan:\n1. Konfirmasi & Kirim Pesanan ke Admin\n0. Batalkan Pesanan"
+        "content": "\u2705 *Konfirmasi Akhir Pesanan*\n- Penerima: *Ahmad*\n- Alamat: *Bandung*\n- Status Pembayaran: *COD (Bayar di Tempat)*\n\nMohon balas dengan *ANGKA* saja untuk menyelesaikan:\n1. Konfirmasi & Kirim Pesanan ke Admin\n0. Batalkan Pesanan"
       },
       {
         "role": "user",
@@ -50,6 +50,6 @@
         "content": "\ud83c\udf89 *Pesanan Kakak Berhasil Terkonfirmasi!* \ud83c\udf89\n\nAdmin kami akan segera menghubungi Kakak dalam beberapa menit untuk konfirmasi pengiriman. Terima kasih banyak telah berbelanja di Senangka! \ud83c\udf49"
       }
     ],
-    "last_active": "2026-07-15T14:59:24.464278"
+    "last_active": "2026-07-15T15:09:10.135909"
   }
 }

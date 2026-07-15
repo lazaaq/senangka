@@ -297,15 +297,23 @@ def webhook():
     # Add incoming message to session
     add_message_to_session(sender, "user", incoming_msg)
     
-    # Fetch updated history for the LLM call
-    session_data = get_session(sender)
-    history = session_data.get("history", [])
+    # Attempt instant local routing for numeric menu inputs to bypass LLM latency
+    from services.menu import process_numeric_message
+    local_reply = process_numeric_message(sender, incoming_msg)
     
-    # 3. Dynamic system prompt (updates database state into prompt on the fly)
-    system_prompt = get_system_prompt()
-    
-    # 4. Request completion from OpenRouter
-    ai_reply = generate_ai_reply(history, system_prompt)
+    if local_reply:
+        logger.info(f"Instant numeric menu reply triggered for {sender}")
+        ai_reply = local_reply
+    else:
+        # Fetch updated history for the LLM call
+        session_data = get_session(sender)
+        history = session_data.get("history", [])
+        
+        # 3. Dynamic system prompt (updates database state into prompt on the fly)
+        system_prompt = get_system_prompt()
+        
+        # 4. Request completion from OpenRouter
+        ai_reply = generate_ai_reply(history, system_prompt)
     
     if not ai_reply:
         logger.error(f"Could not retrieve AI response for phone number: {sender}")
