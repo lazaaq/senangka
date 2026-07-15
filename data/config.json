@@ -1,0 +1,9 @@
+{
+  "bot_name": "Senangka Customer Service",
+  "welcome_message": "Halo! Selamat datang di Senangka. Ada yang bisa kami bantu hari ini?",
+  "error_message": "Maaf, sistem sedang mengalami kendala. Silakan hubungi admin kami atau coba beberapa saat lagi.",
+  "timezone": "Asia/Jakarta",
+  "admin_numbers": [
+    "628123456789"
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "P001",
+    "name": "Jus Semangka Murni (Pure Watermelon Juice)",
+    "price": 15000,
+    "description": "Jus semangka segar tanpa pemanis buatan, dibuat langsung dari semangka organik pilihan.",
+    "stock": 50
+  },
+  {
+    "id": "P002",
+    "name": "Semangka Potong Segar (Fresh Cut Watermelon)",
+    "price": 10000,
+    "description": "Semangka potong dingin, manis, dan siap santap. Porsi 300 gram.",
+    "stock": 30
+  },
+  {
+    "id": "P003",
+    "name": "Smoothie Semangka Mint (Watermelon Mint Smoothie)",
+    "price": 20000,
+    "description": "Smoothie semangka segar berpadu dengan daun mint alami dan sedikit perasan lemon.",
+    "stock": 25
+  },
+  {
+    "id": "P004",
+    "name": "Salad Buah Semangka Spesial",
+    "price": 25000,
+    "description": "Kombinasi semangka, melon, apel, dan buah segar lainnya disajikan dengan saus mayones khas Senangka dan parutan keju melimpah.",
+    "stock": 15
+  }
+]
