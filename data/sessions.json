@@ -1,81 +1,5 @@
 {
-  "6289999999999": {
-    "history": [
-      {
-        "role": "user",
-        "content": "3"
-      },
-      {
-        "role": "assistant",
-        "content": "\ud83d\udecd\ufe0f *Detail Produk: Nangka Madu*\n\ud83d\udcb5 Harga: *Rp 60.000*\n\ud83d\udcdd Deskripsi: Nangka Madu dengan rasa sangat manis dan aroma khas. Cocok untuk dimakan langsung.\n\nUntuk respon lebih cepat, mohon balas dengan *ANGKA* jumlah yang ingin Kakak pesan:\n1. Beli 1 pack/porsi\n2. Beli 2 pack/porsi\n3. Beli 3 pack/porsi (Diskon/Gratis Ongkir!)\n0. Kembali ke Katalog"
-      },
-      {
-        "role": "user",
-        "content": "2"
-      },
-      {
-        "role": "assistant",
-        "content": "\ud83d\udcdd *Ringkasan Pesanan*\n- Menu: *Nangka Madu*\n- Jumlah: *2 porsi/pack*\n- Total Harga: *Rp 120.000*\n\nUntuk melanjutkan pengisian data pengiriman, mohon balas dengan *ANGKA*:\n1. Lanjutkan Pemesanan\n0. Batal & Kembali ke Katalog"
-      },
-      {
-        "role": "user",
-        "content": "1"
-      },
-      {
-        "role": "assistant",
-        "content": "Silakan ketik *Nama Lengkap* Kakak untuk keperluan pengiriman:"
-      },
-      {
-        "role": "user",
-        "content": "Ahmad"
-      },
-      {
-        "role": "assistant",
-        "content": "Terima kasih Kak *Ahmad*. Sekarang, silakan ketik *Alamat Lengkap Pengiriman* Kakak (Jalan, Nomor Rumah, Kecamatan/Kota):"
-      },
-      {
-        "role": "user",
-        "content": "Bandung"
-      },
-      {
-        "role": "assistant",
-        "content": "\u2705 *Konfirmasi Akhir Pesanan*\n- Penerima: *Ahmad*\n- Alamat: *Bandung*\n- Status Pembayaran: *COD (Bayar di Tempat)*\n\nMohon balas dengan *ANGKA* saja untuk menyelesaikan:\n1. Konfirmasi & Kirim Pesanan ke Admin\n0. Batalkan Pesanan"
-      },
-      {
-        "role": "user",
-        "content": "1"
-      },
-      {
-        "role": "assistant",
-        "content": "\ud83c\udf89 *Pesanan Kakak Berhasil Terkonfirmasi!* \ud83c\udf89\n\nAdmin kami akan segera menghubungi Kakak dalam beberapa menit untuk konfirmasi pengiriman. Terima kasih banyak telah berbelanja di Senangka! \ud83c\udf49"
-      }
-    ],
-    "last_active": "2026-07-15T15:09:10.135909"
-  },
-  "628999000001": {
-    "history": [
-      {
-        "role": "user",
-        "content": "Halo"
-      },
-      {
-        "role": "assistant",
-        "content": "\ud83c\udf49 *Selamat datang di Senangka!* \ud83c\udf49\nBuah nangka kupas segar dan olahan nangka premium yang manis, tebal, dan harum.\n\nUntuk respon lebih cepat, mohon balas dengan *ANGKA* saja ya (cukup ketik nomor pilihan Kakak):\n1. Lihat Katalog Produk Nangka\n2. Info Pengiriman & Ongkir\n3. Hubungi Admin (Bantuan)"
-      },
-      {
-        "role": "user",
-        "content": "1"
-      },
-      {
-        "role": "assistant",
-        "content": "\ud83c\udf49 *Katalog Produk Senangka* \ud83c\udf49\n\n1. *Nangka Grade A* - Rp 50.000\n   _Nangka kupas Grade A dengan rasa lebih manis dan daging lebih tebal. Cocok untuk dimakan langsung._\n\n2. *Nangka Grade B* - Rp 45.000\n   _Nangka kupas Grade B dengan rasa manis standar dan ketebalan daging standar. Cocok untuk konsumsi sehari-hari._\n\n3. *Nangka Madu* - Rp 60.000\n   _Nangka Madu dengan rasa sangat manis dan aroma khas. Cocok untuk dimakan langsung._\n\n4. *Tekam Yellow Malaysia (J33)* - Rp 65.000\n   _Varietas Tekam Yellow Malaysia (J33) dengan tekstur renyah dan rasa manis premium._\n\n5. *Nangka Kiloan Fresh* - Rp 35.000\n   _Nangka kiloan fresh dengan rasa manis standar, cocok untuk campuran es buah, es campur, atau dessert._\n\n6. *Nangka Kiloan Beku* - Rp 35.000\n   _Nangka kiloan beku, praktis disimpan lebih lama dan cocok untuk campuran es._\n\n7. *Pie Nangka Mini* - Rp 30.000\n   _Pie Nangka Mini isi 5 pcs. Cocok dinikmati sendiri atau bersama teman._\n\n8. *Pie Nangka Besar* - Rp 85.000\n   _Pie Nangka ukuran besar, cocok untuk 6\u20138 orang._\n\nMohon balas dengan *ANGKA* produk yang ingin Kakak ketahui:\n0. Kembali ke Menu Utama"
-      }
-    ],
-    "menu_state": "catalog",
-    "order_data": {},
-    "last_active": "2026-07-15T15:30:41.535587"
-  },
-  "628777888999": {
+  "6289519408189": {
     "history": [
       {
         "role": "user",
@@ -87,11 +11,11 @@
       },
       {
         "role": "user",
-        "content": "1"
+        "content": "2"
       },
       {
         "role": "assistant",
-        "content": "\ud83d\udcdd *Ringkasan Pesanan*\n- Menu: *Nangka Grade A*\n- Jumlah: *1 porsi/pack*\n- Total Harga: *Rp 50.000*\n\nMohon balas dengan *ANGKA*:\n1. Lanjutkan Pemesanan (Isi Data Pengiriman)\n0. Batal & Kembali ke Katalog"
+        "content": "\ud83d\udcdd *Ringkasan Pesanan*\n- Menu: *Nangka Grade A*\n- Jumlah: *2 porsi/pack*\n- Total Harga: *Rp 100.000*\n\nMohon balas dengan *ANGKA*:\n1. Lanjutkan Pemesanan (Isi Data Pengiriman)\n0. Batal & Kembali ke Katalog"
       },
       {
         "role": "user",
@@ -103,19 +27,19 @@
       },
       {
         "role": "user",
-        "content": "Siti Rahayu"
+        "content": "Lana Saiful"
       },
       {
         "role": "assistant",
-        "content": "Terima kasih Kak *Siti Rahayu*! \ud83d\ude0a\nSekarang, silakan ketik *Alamat Lengkap Pengiriman* Kakak (Jalan, Nomor Rumah, Kecamatan/Kota):"
+        "content": "Terima kasih Kak *Lana Saiful*! \ud83d\ude0a\nSekarang, silakan ketik *Alamat Lengkap Pengiriman* Kakak (Jalan, Nomor Rumah, Kecamatan/Kota):"
       },
       {
         "role": "user",
-        "content": "Jl. Pahlawan No. 7, Bandung"
+        "content": "Jalan Gajahmada no.26 RT 05 RW 07 Kalisapu"
       },
       {
         "role": "assistant",
-        "content": "\u2705 *Konfirmasi Akhir Pesanan*\n- Penerima: *Siti Rahayu*\n- Alamat: *Jl. Pahlawan No. 7, Bandung*\n- Pesanan: *Nangka Grade A x1*\n- Total Bayar: *Rp 50.000*\n- Pembayaran: *COD (Bayar di Tempat)*\n\nMohon balas dengan *ANGKA* saja:\n1. Konfirmasi & Kirim Pesanan ke Admin \u2705\n0. Batalkan Pesanan \u274c"
+        "content": "\u2705 *Konfirmasi Akhir Pesanan*\n- Penerima: *Lana Saiful*\n- Alamat: *Jalan Gajahmada no.26 RT 05 RW 07 Kalisapu*\n- Pesanan: *Nangka Grade A x2*\n- Total Bayar: *Rp 100.000*\n- Pembayaran: *COD (Bayar di Tempat)*\n\nMohon balas dengan *ANGKA* saja:\n1. Konfirmasi & Kirim Pesanan ke Admin \u2705\n0. Batalkan Pesanan \u274c"
       },
       {
         "role": "user",
@@ -123,11 +47,34 @@
       },
       {
         "role": "assistant",
-        "content": "\ud83c\udf89 *Pesanan Berhasil Dikonfirmasi!* \ud83c\udf89\n\nHalo Kak *Siti Rahayu*, terima kasih telah berbelanja di *Senangka*! \ud83c\udf49\n\n\ud83d\udccb *Ringkasan Pesanan:*\n- Produk : Nangka Grade A x1\n- Alamat : Jl. Pahlawan No. 7, Bandung\n- Subtotal: Rp 50.000\n- Ongkir  : Rp 10.000\n- *Total  : Rp 60.000*\n\n\ud83d\udcb3 Pembayaran: *COD (Bayar di Tempat)*\nKurir kami akan segera menghubungi Kakak untuk konfirmasi jadwal pengiriman.\n\nInvoice PDF telah kami kirimkan. Simpan sebagai bukti pesanan ya Kak! \ud83d\ude0a\n\nKetik pesan apa saja untuk kembali ke Menu Utama."
+        "content": "\ud83c\udf89 *Pesanan Berhasil Dikonfirmasi!* \ud83c\udf89\n\nHalo Kak *Lana Saiful*, terima kasih telah berbelanja di *Senangka*! \ud83c\udf49\n\n\ud83d\udccb *Ringkasan Pesanan:*\n- Produk : Nangka Grade A x2\n- Alamat : Jalan Gajahmada no.26 RT 05 RW 07 Kalisapu\n- Subtotal: Rp 100.000\n- Ongkir  : Rp 10.000\n- *Total  : Rp 110.000*\n\n\ud83d\udcb3 Pembayaran: *COD (Bayar di Tempat)*\nKurir kami akan segera menghubungi Kakak untuk konfirmasi jadwal pengiriman.\n\nInvoice PDF telah kami kirimkan. Simpan sebagai bukti pesanan ya Kak! \ud83d\ude0a\n\nKetik pesan apa saja untuk kembali ke Menu Utama."
       }
     ],
     "menu_state": "start",
     "order_data": {},
-    "last_active": "2026-07-15T15:42:11.604349"
+    "last_active": "2026-07-15T16:52:47.342911"
+  },
+  "6281342480684": {
+    "history": [
+      {
+        "role": "user",
+        "content": "hai"
+      },
+      {
+        "role": "user",
+        "content": "zea"
+      },
+      {
+        "role": "assistant",
+        "content": "Halo Kak! Selamat datang di Senangka Customer Service. Senang bisa membantu Kakak hari ini \ud83d\ude0a  \n\nUntuk respon lebih cepat, mohon balas dengan *ANGKA* saja ya (cukup ketik nomornya):  \n1. Lihat Katalog Produk Nangka  \n2. Info Pengiriman & Ongkir  \n3. Hubungi Admin (Bantuan)  \n\n*Contoh: Ketik \"1\" untuk melihat produk kami* \ud83d\ude80"
+      },
+      {
+        "role": "assistant",
+        "content": "Halo Kak, senang bertemu dengan Anda! \ud83d\ude0a\n\nUntuk memulai, silakan pilih menu berikut dengan membalas *ANGKA* saja ya:  \n\n1. Lihat Katalog Produk Nangka  \n2. Info Pengiriman & Ongkir  \n3. Hubungi Admin (Bantuan)  \n\nAyo Kak, pilih angka favoritmu! \ud83d\ude80"
+      }
+    ],
+    "menu_state": "main_menu",
+    "order_data": {},
+    "last_active": "2026-07-15T16:54:50.816364"
   }
 }
